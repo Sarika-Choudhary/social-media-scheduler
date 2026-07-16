@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../services/api";
 
 const Login = () => {
@@ -23,19 +23,23 @@ const Login = () => {
     try {
       const response = await API.post("/auth/login", formData);
 
+      console.log(response.data);
+
       localStorage.setItem("token", response.data.token);
 
       alert("Login Successful");
 
       navigate("/dashboard");
     } catch (error) {
+      console.error(error);
+
       alert(error.response?.data?.message || "Login Failed");
     }
   };
 
   return (
     <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h2 className="mb-4">Login</h2>
+      <h2 className="mb-4 text-center">Login</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -66,6 +70,11 @@ const Login = () => {
           Login
         </button>
       </form>
+
+      <div className="text-center mt-3">
+        Don't have an account?{" "}
+        <Link to="/register">Register Here</Link>
+      </div>
     </div>
   );
 };
