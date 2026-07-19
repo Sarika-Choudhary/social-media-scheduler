@@ -4,21 +4,18 @@ const PostCard = ({ post, onDelete, onEdit }) => {
   return (
     <div className="card mb-3">
       <div className="card-body">
-        {post.media && (
-          <img
-            src={`${BACKEND_URL}/uploads/${post.media}`}
-            alt={post.title}
-            className="img-fluid mb-3"
-            style={{
-              width: "100%",
-              maxHeight: "300px",
-              objectFit: "cover",
-            }}
-            onError={(e) => {
-              e.target.style.display = "none";
-            }}
-          />
-        )}
+    {post.media && (
+  <img
+    src={post.media}
+    alt={post.title}
+    className="img-fluid mb-3"
+    style={{
+      width: "100%",
+      maxHeight: "300px",
+      objectFit: "cover",
+    }}
+  />
+)}
 
         <h4>{post.title}</h4>
 

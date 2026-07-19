@@ -13,7 +13,7 @@ const createPost = async (req, res) => {
     const post = await Post.create({
       title,
       description,
-      media: req.file ? req.file.filename : "",
+      media: req.file ? req.file.path : "",
       platforms,
       scheduledAt,
       createdBy: req.user._id,
