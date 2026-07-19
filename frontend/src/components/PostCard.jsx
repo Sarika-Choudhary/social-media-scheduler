@@ -1,13 +1,22 @@
+const BACKEND_URL = "https://social-media-scheduler-fe79.onrender.com";
+
 const PostCard = ({ post, onDelete, onEdit }) => {
   return (
     <div className="card mb-3">
       <div className="card-body">
         {post.media && (
           <img
-            src={`http://localhost:5000/uploads/${post.media}`}
+            src={`${BACKEND_URL}/uploads/${post.media}`}
             alt={post.title}
             className="img-fluid mb-3"
-            style={{ maxHeight: "300px", objectFit: "cover" }}
+            style={{
+              width: "100%",
+              maxHeight: "300px",
+              objectFit: "cover",
+            }}
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
           />
         )}
 
@@ -16,7 +25,10 @@ const PostCard = ({ post, onDelete, onEdit }) => {
         <p>{post.description}</p>
 
         <p>
-          <strong>Platform:</strong> {post.platforms.join(", ")}
+          <strong>Platform:</strong>{" "}
+          {Array.isArray(post.platforms)
+            ? post.platforms.join(", ")
+            : post.platforms}
         </p>
 
         <p>
